@@ -13,5 +13,5 @@ thiserror = "2.0.12"
 unic-langid = "0.9.6"
 
 [dev-dependencies]
-rstest = "0.25.0"
+rstest = "0.26.1"
 testresult = "0.4.1"
