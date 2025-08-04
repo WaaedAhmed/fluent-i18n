@@ -1,6 +1,6 @@
 [package]
 name = "fluent-i18n"
-version = "0.1.0"
+version = "0.1.0-rc.0"
 edition = "2021"
 readme = "README.md"
 description = "A declarative and ergonomic internationalization for Rust using Fluent"
