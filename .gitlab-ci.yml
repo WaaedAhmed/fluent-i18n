@@ -19,7 +19,7 @@ clippy:
   script:
     - cargo clippy --all -- -D warnings
 
-deny:
+reuse:
   stage: lint
   script:
     - reuse lint
@@ -37,7 +37,7 @@ test:
 publish:
   stage: publish
   rules:
-    - if: '$CARGO_REGISTRY_TOKEN && $CI_COMMIT_TAG'
+    - if: "$CARGO_REGISTRY_TOKEN && $CI_COMMIT_TAG"
   script:
     - cargo publish
   tags:
