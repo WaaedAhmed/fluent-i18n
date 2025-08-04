@@ -2,8 +2,15 @@
 name = "fluent-i18n"
 version = "0.1.0"
 edition = "2021"
+readme = "README.md"
+description = "A declarative and ergonomic internationalization for Rust using Fluent"
+authors = ["Orhun Parmaksız <orhun@archlinux.org>"]
 license = "Apache-2.0 OR MIT"
+homepage = "https://gitlab.archlinux.org/orhun/fluent-i18n"
+repository = "https://gitlab.archlinux.org/orhun/fluent-i18n"
+documentation = "https://docs.rs/fluent-i18n/"
 keywords = ["fluent", "i18n", "internationalization", "localization"]
+categories = ["internationalization", "localization"]
 rust-version = "1.85.1"
 
 [dependencies]
