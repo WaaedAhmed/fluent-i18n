@@ -10,10 +10,10 @@ _Built on top of [`fluent-templates`] and inspired by the simplicity of [`rust-i
 
 ## Features
 
-- Static file loading via `i18n!()` macro
-- Zero-boilerplate `t!()` macro for inline translations
-- Extensible argument system via `ToFluentValue` trait
-- Thread-local handling via `set_locale()` and `get_locale()`
+- Static file loading via [`i18n!()`] macro
+- Zero-boilerplate [`t!()`] macro for inline translations
+- Extensible argument system via [`ToFluentValue`] trait
+- Thread-local handling via [`set_locale()`] and [`get_locale()`]
 - Clean fallback locale management
 
 ## Example
@@ -48,7 +48,7 @@ cargo add fluent-i18n
 
 ### Initialization
 
-At the entry point of your application (e.g., `main.rs` or `lib.rs`), invoke the `i18n!()` macro to initialize the localization system:
+At the entry point of your application (e.g., `main.rs` or `lib.rs`), invoke the [`i18n!()`] macro to initialize the localization system:
 
 ```rust,ignore
 i18n!("locales");
@@ -60,9 +60,9 @@ Or with a fallback locale:
 i18n!("locales", fallback = "en-US");
 ```
 
-This will expose a static loader named `LOCALES` that will be used by the `t!()` macro for translations throughout your application.
+This will expose a static loader named `LOCALES` that will be used by the [`t!()`] macro for translations throughout your application.
 
-You can also dynamically change the locale at runtime using the `set_locale()` function:
+You can also dynamically change the locale at runtime using the [`set_locale()`] function:
 
 ```rust,ignore
 use fluent_i18n::{set_locale, get_locale};
@@ -76,7 +76,7 @@ Running `set_locale(None)` will detect the system locale automatically.
 
 ### Lookup
 
-To look up a translation for a given key, use the `t!()` macro:
+To look up a translation for a given key, use the [`t!()`] macro:
 
 ```rust,ignore
 t!("greeting");
@@ -93,14 +93,14 @@ The given parameters should be one of the [supported types](#supported-types).
 
 ### Supported Types
 
-The `t!()` macro interpolates values into the message using the `ToFluentValue` trait.
+The [`t!()`] macro interpolates values into the message using the [`ToFluentValue`] trait.
 
-The following types implement the `ToFluentValue` trait:
+The following types implement the [`ToFluentValue`] trait:
 
 - `String`, `&'static str`, `Cow<'static, str>`
 - Integer and float primitives (`usize`, `u32`, `i64`, etc.)
 - `Path`, `PathBuf`
-- `Option<T>` where `T` implements `ToFluentValue`
+- `Option<T>` where `T` implements [`ToFluentValue`]
 
 You can extend support for your own types by implementing this trait:
 
@@ -165,6 +165,11 @@ Feel free to open issues or PRs for improvements, bug fixes, or ideas!
 
 _This library was originally developed as part of the [ALPM project] and later extracted for general-purpose use._
 
+[`t!()`]: https://docs.rs/fluent-i18n/latest/fluent_i18n/macro.t.html
+[`i18n!()`]: https://docs.rs/fluent-i18n/latest/fluent_i18n/macro.i18n.html
+[`ToFluentValue`]: https://docs.rs/fluent-i18n/latest/fluent_i18n/trait.ToFluentValue.html
+[`set_locale()`]: https://docs.rs/fluent-i18n/latest/fluent_i18n/locale/fn.set_locale.html
+[`get_locale()`]: https://docs.rs/fluent-i18n/latest/fluent_i18n/locale/fn.get_locale.html
 [Fluent]: https://projectfluent.org
 [Fluent syntax]: https://projectfluent.org/fluent/guide/
 [`fluent-templates`]: https://github.com/XAMPPRocky/fluent-templates
