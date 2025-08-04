@@ -153,6 +153,8 @@ fn test_translation() {
 This project can be used under the terms of the [Apache-2.0] or [MIT].
 Contributions to this project, unless noted otherwise, are automatically licensed under the terms of both of those licenses.
 
+🦀 ノ( º \_ º ノ) - _respect crables!_
+
 Feel free to open issues or PRs for improvements, bug fixes, or ideas!
 
 ## Acknowledgements
@@ -160,7 +162,8 @@ Feel free to open issues or PRs for improvements, bug fixes, or ideas!
 - [Project Fluent][Fluent]
 - [`fluent-templates`]
 - [`rust-i18n`]
-- [ALPM project]: for motivating the initial design and real-world usage for providing a robust i18n solution for for Rust-based packaging tools
+
+_This library was originally developed as part of the [ALPM project] and later extracted for general-purpose use._
 
 [Fluent]: https://projectfluent.org
 [Fluent syntax]: https://projectfluent.org/fluent/guide/
