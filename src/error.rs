@@ -1,8 +1,10 @@
+//! Error handling.
+
 use unic_langid::LanguageIdentifierError;
 
 use crate::t;
 
-/// Error implementation.
+/// The error that may occur while using the crate.
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
     /// An error occurred while parsing a locale.
@@ -21,6 +23,7 @@ mod tests {
 
     use super::*;
 
+    /// Make sure that the message of the error is properly translated
     #[rstest]
     #[case("en-US", r#"Could not parse locale "en-US""#)]
     #[case("fr-FR", r#"Impossible d’analyser la langue « fr-FR »"#)]
@@ -28,7 +31,7 @@ mod tests {
     #[case("tr-TR", r#""tr-TR" yerel ayarı tanınmadı"#)]
     #[case("ja-JP", r#"ロケール "ja-JP" を解析できませんでした"#)]
     #[case("ar-SA", r#"تعذر تحليل اللغة "ar-SA""#)]
-    fn test_localized_error(
+    fn test_error_message_localization(
         #[case] locale: &str,
         #[case] expected: &str,
     ) -> testresult::TestResult {

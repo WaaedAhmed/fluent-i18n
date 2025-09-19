@@ -14,7 +14,7 @@ mod macros;
 /// Re-export the [`fluent_templates`] crate.
 pub use fluent_templates;
 
-// Crate locale.
+// Loads the locale for the crate.
 //
 // NOTE: We use the explicit initialization instead of `i18n!` macro
 // here to avoid importing `fluent_templates` twice.
@@ -27,7 +27,7 @@ fluent_templates::static_loader! {
     };
 }
 
-// Test locale.
+// Loads the locale for the tests.
 //
 //
 // NOTE: We use the explicit initialization instead of `i18n!` macro

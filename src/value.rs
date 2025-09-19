@@ -1,3 +1,5 @@
+//! Custom value handling compatible with [`FluentValue`].
+
 use std::{
     borrow::Cow,
     path::{Path, PathBuf},
@@ -18,27 +20,31 @@ pub trait ToFluentValue {
     fn to_fluent_value(&self) -> FluentValue<'static>;
 }
 
-/// Convert a [`Path`] to a [`FluentValue`] by converting it to a string.
 impl ToFluentValue for Path {
+    /// Converts a [`Path`] to a [`FluentValue`] by converting it to a string.
+    ///
+    /// # Note
+    ///
+    /// This transforms the [`Path`] using [`Path::to_string_lossy`].
     fn to_fluent_value(&self) -> FluentValue<'static> {
         FluentValue::from(self.to_string_lossy().into_owned())
     }
 }
 
-/// Convert a [`PathBuf`] to a [`FluentValue`] by converting it to a string.
-///
-/// Calls the `ToFluentValue` implementation for [`Path`].
 impl ToFluentValue for PathBuf {
+    /// Converts a [`PathBuf`] to a [`FluentValue`] by converting it to a string.
+    ///
+    /// Calls the [`ToFluentValue`] implementation for [`Path`].
     fn to_fluent_value(&self) -> FluentValue<'static> {
         self.as_path().to_fluent_value()
     }
 }
 
-/// Blanket implementation for `Option<T>`
 impl<T> ToFluentValue for Option<T>
 where
     T: ToFluentValue,
 {
+    /// Blanket implementation for `Option<T>`
     fn to_fluent_value(&self) -> FluentValue<'static> {
         match self {
             Some(value) => value.to_fluent_value(),
@@ -53,8 +59,7 @@ where
 ///
 /// See [trait implementations] for the list of types that implement [`From`] for [`FluentValue`].
 ///
-/// [trait implementations]:
-/// https://docs.rs/fluent-bundle/latest/fluent_bundle/enum.FluentValue.html#trait-implementations
+/// [trait implementations]: https://docs.rs/fluent-bundle/latest/fluent_bundle/enum.FluentValue.html#trait-implementations
 macro_rules! impl_fluent_for {
     ( $( $t:ty ),+ $(,)? ) => {
         $(
@@ -88,12 +93,14 @@ impl_fluent_for!(
 
 #[cfg(test)]
 mod tests {
+    use testresult::TestResult;
+
     use crate::{set_locale, t};
 
-    // Asserts that the custom [`FluentValue`] conversions
-    // work as expected (e.g. PathBuf)
+    /// Asserts that the custom [`FluentValue`] conversions
+    /// work as expected (e.g. for [`PathBuf`]).
     #[test]
-    fn test_custom_fluent_type() -> testresult::TestResult<()> {
+    fn test_custom_fluent_type() -> TestResult<()> {
         set_locale(Some("en-US"))?;
 
         let path = std::path::PathBuf::from("/some/path/to/file.txt");

@@ -5,7 +5,7 @@ use std::{env, str::FromStr, thread};
 use fluent_i18n::{get_locale, i18n, set_locale, t};
 use unic_langid::LanguageIdentifier;
 
-// Test the French translations with fallback to English.
+/// Ensures that French translations can be used with a fallback to English.
 #[test]
 fn i18n_french_with_fallback() -> testresult::TestResult {
     i18n!("tests/locales", fallback = "en-US");
@@ -27,18 +27,21 @@ fn i18n_french_with_fallback() -> testresult::TestResult {
     );
 
     // Unknown key
-    assert_eq!(t!(LOCALES, "unknown"), "Unknown localization unknown");
+    assert_eq!(
+        t!(LOCALES, "unknown"),
+        "Unknown localization key: \"unknown\""
+    );
 
     // Fallback to English for missing key
     assert_eq!(
-        t!(LOCALES, "missing-in-other"),
+        t!(LOCALES, "english-only-translation"),
         "This message only exists in English"
     );
 
     Ok(())
 }
 
-// Test the Arabic translations without Unicode isolation characters.
+/// Ensures that the Arabic translations are used without Unicode isolation characters.
 #[test]
 fn i18n_mixed_script_no_isolation() -> testresult::TestResult {
     i18n!("tests/locales");
@@ -54,7 +57,7 @@ fn i18n_mixed_script_no_isolation() -> testresult::TestResult {
     Ok(())
 }
 
-// Test the behavior of thread-local locales.
+/// Ensures that different locales can be used per thread.
 #[test]
 fn test_thread_local_behavior() -> testresult::TestResult {
     i18n!("tests/locales");
@@ -77,7 +80,7 @@ fn test_thread_local_behavior() -> testresult::TestResult {
     Ok(())
 }
 
-// Test the i18n system with a different fallback locale.
+/// Ensures that a different fallback locale other than `"en-US"` can be used.
 #[test]
 fn i18n_with_different_fallback() -> testresult::TestResult {
     i18n!("tests/locales", fallback = "fr-FR");
@@ -90,8 +93,8 @@ fn i18n_with_different_fallback() -> testresult::TestResult {
     // Using a key only available in English
     // but the fallback is set to French
     assert_eq!(
-        t!(LOCALES, "missing-in-other"),
-        "Unknown localization missing-in-other"
+        t!(LOCALES, "english-only-translation"),
+        "Unknown localization key: \"english-only-translation\""
     );
 
     // Using a key only available in French
@@ -104,7 +107,7 @@ fn i18n_with_different_fallback() -> testresult::TestResult {
     Ok(())
 }
 
-// Test setting the locale with an environment variable.
+/// Ensures that setting the locale with an environment variable is possible.
 #[test]
 fn i18n_with_env() -> testresult::TestResult {
     // Set locale to Japanese
@@ -124,7 +127,7 @@ fn i18n_with_env() -> testresult::TestResult {
 
     // Fallback to English for missing key
     assert_eq!(
-        t!(LOCALES, "missing-in-other"),
+        t!(LOCALES, "english-only-translation"),
         "This message only exists in English"
     );
     Ok(())

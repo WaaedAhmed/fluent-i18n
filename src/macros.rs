@@ -1,6 +1,9 @@
+//! Macros for loading locales and looking up translations
+
 /// Macro to initialize the i18n system with a specified directory for locale files.
 ///
 /// It should be called at the start of the application (either in `main.rs` or `lib.rs`).
+/// Then you can use the [`t!`] macro to look up translations.
 ///
 /// It supports two forms of usage:
 ///
@@ -14,7 +17,20 @@
 ///  Initializes the i18n system with the specified directory ("locales") and
 ///  uses the default fallback locale ("en-US").
 ///
-/// Then you can use the [`t!`] macro to look up translations.
+/// # Examples
+///
+/// For binaries:
+///
+/// ```no_run
+/// # #[allow(clippy::needless_doctest_main)]
+/// fluent_i18n::i18n!("locales");
+///
+/// fn main() {
+///     println!("{}", fluent_i18n::t!("greeting"));
+/// }
+/// ```
+///
+/// For libraries, simply call [`i18n!`] macro before/after your module definitions in `lib.rs``
 ///
 /// # Note
 ///
@@ -23,7 +39,8 @@
 /// and fallback locale. The loader can be accessed in the scope where this macro is called,
 /// which is usually the root module of your application (e.g. `crate::LOCALES`).
 ///
-/// [`t!`]: crate::t!
+/// [`t!`]: crate::t
+/// [`i18n!`]: crate::i18n
 #[macro_export]
 macro_rules! i18n {
     ($dir:expr, fallback = $fallback:literal) => {
@@ -66,6 +83,13 @@ macro_rules! i18n {
 
 /// Macro to lookup a translation for a given key.
 ///
+/// # Note
+///
+/// Call [`i18n!`] macro to initialize the i18n system with default static loader
+/// before using this macro.
+///
+/// # Usage
+///
 /// This macro can be used in two ways:
 ///
 /// 1. `t!("key")`
@@ -79,11 +103,6 @@ macro_rules! i18n {
 ///
 ///   The argument values must implement the [`ToFluentValue`] trait, which allows
 ///   converting various types to a [`FluentValue`].
-///
-/// # Note
-///
-/// Call [`i18n!`] macro to initialize the i18n system with default static loader
-/// before using this macro.
 ///
 /// # Using a custom static loader
 ///
@@ -127,72 +146,90 @@ macro_rules! i18n {
 // but we need it here to access the `LOCALES` static loader
 // from the crate where it is defined.
 //
-// In other words, using `$crate` points to `alpm_common::LOCALES`
+// In other words, using `$crate` points to `fluent_i18n::LOCALES`
 // which is not what we want. Instead, we want to access the `LOCALES`
-// from the crate where the macro is invoked.
+// from the crate where the `t` macro is invoked.
 #[allow(clippy::crate_in_macro_def)]
 #[macro_export]
 macro_rules! t {
     // t!("key")
     ($key:expr) => {{
-        use $crate::fluent_templates::Loader;
-        crate::LOCALES.lookup(&$crate::get_locale(), $key)
+        if $crate::locale::RAW_MODE_ENABLED.with(|b| *b.borrow()) {
+            $key.to_string()
+        } else {
+            use $crate::fluent_templates::Loader;
+            crate::LOCALES.lookup(&$crate::get_locale(), $key)
+        }
     }};
 
     // t!("key", { arg => val, ... })
     ($key:expr, { $($arg:expr => $val:expr),+ $(,)? }) => {{
-        use $crate::fluent_templates::Loader;
-        use $crate::ToFluentValue;
-        use std::borrow::Cow;
-        let mut args = ::std::collections::HashMap::new();
-        $(
-            args.insert(Cow::Borrowed($arg), $val.to_fluent_value());
-        )+
-        crate::LOCALES.lookup_with_args(&$crate::get_locale(), $key, &args)
+        if $crate::locale::RAW_MODE_ENABLED.with(|b| *b.borrow()) {
+            $key.to_string()
+        } else {
+            use $crate::fluent_templates::Loader;
+            use $crate::ToFluentValue;
+            use std::borrow::Cow;
+            let mut args = ::std::collections::HashMap::new();
+            $(
+                args.insert(Cow::Borrowed($arg), $val.to_fluent_value());
+            )+
+            crate::LOCALES.lookup_with_args(&$crate::get_locale(), $key, &args)
+        }
     }};
 
     // t!(LOCALES, "key")
     ($locales:expr, $key:expr) => {{
-        use $crate::fluent_templates::Loader;
-        $locales.lookup(&$crate::get_locale(), $key)
+        if $crate::locale::RAW_MODE_ENABLED.with(|b| *b.borrow()) {
+            $key.to_string()
+        } else {
+            use $crate::fluent_templates::Loader;
+            $locales.lookup(&$crate::get_locale(), $key)
+        }
     }};
 
     // t!(LOCALES, "key", { arg => val, ... })
     ($locales:expr, $key:expr, { $($arg:expr => $val:expr),+ $(,)? }) => {{
-        use $crate::fluent_templates::Loader;
-        use $crate::ToFluentValue;
-        use std::borrow::Cow;
-        let mut args = ::std::collections::HashMap::new();
-        $(
-            args.insert(Cow::Borrowed($arg), $val.to_fluent_value());
-        )+
-        $locales.lookup_with_args(&$crate::get_locale(), $key, &args)
+        if $crate::locale::RAW_MODE_ENABLED.with(|b| *b.borrow()) {
+            $key.to_string()
+        } else {
+            use $crate::fluent_templates::Loader;
+            use $crate::ToFluentValue;
+            use std::borrow::Cow;
+            let mut args = ::std::collections::HashMap::new();
+            $(
+                args.insert(Cow::Borrowed($arg), $val.to_fluent_value());
+            )+
+            $locales.lookup_with_args(&$crate::get_locale(), $key, &args)
+        }
     }};
 }
 
 #[cfg(test)]
 mod tests {
+    use testresult::TestResult;
+
     use crate::set_locale;
 
-    // Ensures that the value lookups with/without parameters
-    // work correctly for the English locale.
+    /// Ensures that the value lookups with/without parameters
+    /// work correctly for the English locale.
     #[test]
-    fn test_localization_lookup() -> testresult::TestResult<()> {
+    fn test_localization_lookup() -> TestResult<()> {
         set_locale(Some("en-US"))?;
 
         assert_eq!(t!("greeting"), "Hello, world!");
         assert_eq!(t!("welcome", { "name" => "Orhun" }), "Welcome, Orhun!");
         assert_eq!(t!("count-items", { "count" => 1 }), "You have 1 item");
         assert_eq!(t!("count-items", { "count" => 5 }), "You have 5 items");
-        assert_eq!(t!("unknown"), "Unknown localization unknown");
+        assert_eq!(t!("unknown"), "Unknown localization key: \"unknown\"");
 
         Ok(())
     }
 
-    // Ensures that Latin script names are NOT isolated in RTL context
-    // since the Unicode directional isolation is disabled.
+    /// Ensures that Latin script names are NOT isolated in RTL context
+    /// since the Unicode directional isolation is disabled.
     #[test]
-    fn test_unicode_directional_isolation_disabled() -> testresult::TestResult<()> {
+    fn test_unicode_directional_isolation_disabled() -> TestResult {
         set_locale(Some("ar-SA"))?;
 
         let message = t!("welcome", { "name" => "John Smith" });

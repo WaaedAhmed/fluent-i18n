@@ -1,8 +1,9 @@
 # fluent-i18n 🗣️🔥
 
+![docs.rs](https://img.shields.io/docsrs/fluent-i18n)
+![Crates.io MSRV](https://img.shields.io/crates/msrv/fluent-i18n)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache-blue.svg)](https://opensource.org/license/apache-2-0)
-![MSRV 1.85+](https://img.shields.io/badge/MSRV-1.85+-red.svg)
 
 **A declarative and ergonomic internationalization for Rust using [Fluent]**.
 
@@ -131,7 +132,8 @@ locales/
     └── main.ftl
 ```
 
-The directory names should adhere to the [Unicode Language Identifier]. It also respects any `.gitignore` or `.ignore` files present.
+The directory names should adhere to the [Unicode Language Identifier].
+It also respects any `.gitignore` or `.ignore` files present.
 
 See the [Fluent syntax] for more details about FTL files.
 
@@ -191,7 +193,7 @@ Feel free to open issues or PRs for improvements, bug fixes, or ideas!
 - [`fluent-templates`]
 - [`rust-i18n`]
 
-_This library was originally developed as part of the [ALPM project] and later extracted for general-purpose use._
+This library was originally developed as part of the [ALPM project] and later extracted for general-purpose use.
 
 [`t!()`]: https://docs.rs/fluent-i18n/latest/fluent_i18n/macro.t.html
 [`i18n!()`]: https://docs.rs/fluent-i18n/latest/fluent_i18n/macro.i18n.html
@@ -200,10 +202,10 @@ _This library was originally developed as part of the [ALPM project] and later e
 [`get_locale()`]: https://docs.rs/fluent-i18n/latest/fluent_i18n/locale/fn.get_locale.html
 [Fluent]: https://projectfluent.org
 [Fluent syntax]: https://projectfluent.org/fluent/guide/
-[`fluent-templates`]: https://github.com/XAMPPRocky/fluent-templates
+[`fluent-templates`]: https://docs.rs/fluent-templates
 [`rust-i18n`]: https://github.com/longbridge/rust-i18n
 [`fluent-i18n`]: https://crates.io/crates/fluent-i18n
-[ALPM project]: https://gitlab.archlinux.org/archlinux/alpm
+[ALPM project]: https://alpm.archlinux.page
 [Unicode Language Identifier]: https://docs.rs/unic-langid
 [Apache-2.0]: https://opensource.org/license/apache-2-0
 [MIT]: https://opensource.org/licenses/MIT
