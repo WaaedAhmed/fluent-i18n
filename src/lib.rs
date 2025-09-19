@@ -1,7 +1,7 @@
 #![doc = include_str!("../README.md")]
 
 pub mod locale;
-pub use locale::{get_locale, set_locale};
+pub use locale::{get_locale, set_locale, set_raw_mode};
 
 mod error;
 pub use error::Error;

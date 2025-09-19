@@ -24,6 +24,17 @@ thread_local! {
     ///
     /// This is thread-local storage, meaning each thread has its own instance of this variable.
     static CURRENT_LOCALE: RefCell<Option<LanguageIdentifier>> = const { RefCell::new(None) };
+
+    /// Indicates whether the raw mode is enabled.
+    ///
+    /// When raw mode is enabled, translations will return the key itself instead of
+    /// looking up the translation. This is useful for debugging purposes to see which keys are
+    /// being requested.
+    ///
+    /// # Thread Safety
+    ///
+    /// This is thread-local storage, meaning each thread has its own instance of this variable.
+    pub static RAW_MODE_ENABLED: RefCell<bool> = const { RefCell::new(false) };
 }
 
 /// The fallback locale used when no other locale is set or detected.
@@ -197,6 +208,22 @@ mod tests {
             LanguageIdentifier::from_str("unknown-locale")?,
         );
         assert_eq!(t!("greeting"), "Hello, world!");
+        Ok(())
+    }
+
+    /// Ensures that the raw mode works as expected.
+    /// When raw mode is enabled, the translations
+    /// should return the key itself.
+    #[test]
+    fn test_raw_mode() -> TestResult<()> {
+        set_locale(Some("en-US"))?;
+        set_raw_mode(true);
+        assert_eq!(t!("greeting"), "greeting");
+        assert_eq!(t!("welcome", { "name" => "Orhun" }), "welcome");
+
+        set_locale(Some("ja-JP"))?;
+        assert_eq!(t!("whatever"), "whatever");
+
         Ok(())
     }
 }

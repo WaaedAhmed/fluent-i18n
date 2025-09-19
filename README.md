@@ -148,6 +148,34 @@ fn test_translation() {
 }
 ```
 
+### Debugging
+
+When raw mode is enabled, translations will return the key itself instead of looking up the translation.
+This is useful for debugging purposes to see which keys are being requested.
+
+```rust,ignore
+use fluent_i18n::{t, set_raw_mode};
+
+set_raw_mode(true);
+
+let raw_message = t!("some-translation-key"); // "some-translation-key"
+```
+
+You could also follow this workflow for translating missing strings:
+
+- Run the program and navigate to the area you want to test.
+- Enable raw mode with `set_raw_mode(true)`.
+- Look for untranslated output (the raw key will be shown instead of the translation).
+- Copy that key.
+- Search for it in the project.
+- Add the missing translation.
+
+### Security
+
+Unicode directional isolate characters (U+2068, U+2069) are disabled as default to prevent potential security issues like bidirectional text attacks. This also gives clean output without unexpected characters in translations.
+
+Also, please note that this is only applicable for mixed-script languages such as Arabic, Hebrew, and Persian.
+
 ## License & Contributions
 
 This project can be used under the terms of the [Apache-2.0] or [MIT].

@@ -110,6 +110,15 @@ macro_rules! i18n {
 ///
 /// [`ToFluentValue`]: crate::ToFluentValue
 /// [`FluentValue`]: fluent_templates::fluent_bundle::FluentValue
+///
+///
+/// # Debugging
+///
+/// When the raw mode is enabled via [`set_raw_mode`],
+/// this macro will return the key itself instead of looking up the translation.
+/// This is useful for debugging purposes to see which keys are being requested.
+///
+/// [`set_raw_mode`]: crate::set_raw_mode
 // Allow using `crate::` in the macro definition.
 //
 // See <https://rust-lang.github.io/rust-clippy/master/index.html#crate_in_macro_def>
