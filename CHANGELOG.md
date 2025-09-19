@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.1.0-rc.2 - 2025-09-19
+
+### Documentation
+
+- Improve the documentation
+
+### Features
+
+- Add raw mode for debugging
+
+### Miscellaneous Tasks
+
+- Bump thiserror dependency
+- Update dependencies and enable lints
+- Update license details
+- Format the git-cliff configuration
+- Bump dependencies
+
+### Commit Statistics
+
+- 7 commit(s) contributed to the release.
+- 8 day(s) passed between the first and last commit.
+- 7 commit(s) parsed as conventional.
+- 0 linked issue(s) detected in commits.
+- 46 day(s) passed between releases.
+
 ## 0.1.0-rc.1 - 2025-08-04
 
 ### Documentation
