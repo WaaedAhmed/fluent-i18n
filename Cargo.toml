@@ -16,9 +16,13 @@ rust-version = "1.85.1"
 [dependencies]
 fluent-templates = "0.13.0"
 sys-locale = "0.3.2"
-thiserror = "2.0.16"
+thiserror = "2.0.12"
 unic-langid = "0.9.6"
 
 [dev-dependencies]
 rstest = "0.26.1"
 testresult = "0.4.1"
+
+[lints.rust]
+missing_debug_implementations = "deny"
+missing_docs = "deny"
