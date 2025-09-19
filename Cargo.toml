@@ -14,9 +14,9 @@ categories = ["internationalization", "localization"]
 rust-version = "1.85.1"
 
 [dependencies]
-fluent-templates = "0.13.0"
+fluent-templates = "0.13.1"
 sys-locale = "0.3.2"
-thiserror = "2.0.12"
+thiserror = "2.0.16"
 unic-langid = "0.9.6"
 
 [dev-dependencies]
