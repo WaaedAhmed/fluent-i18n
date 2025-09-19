@@ -1,21 +1,16 @@
 version = 1
 
 [[annotations]]
-path = ["**.rs"]
 SPDX-FileCopyrightText = "fluent-i18n contributors"
 SPDX-License-Identifier = "Apache-2.0 OR MIT"
+path = ["**.rs"]
 
 [[annotations]]
-path = [
-  "**.ftl",
-  "**.toml",
-  "**.lock",
-  ".git*"
-]
 SPDX-FileCopyrightText = "fluent-i18n contributors"
 SPDX-License-Identifier = "CC0-1.0"
+path = ["**.ftl", "**.lock", "**.toml", ".git*"]
 
 [[annotations]]
-path = ["**.md"]
 SPDX-FileCopyrightText = "fluent-i18n contributors"
 SPDX-License-Identifier = "CC-BY-SA-4.0"
+path = ["**.md"]
