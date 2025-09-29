@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.1.0 - 2025-09-29
+
+### Miscellaneous Tasks
+
+- Bump dependencies
+
+### Commit Statistics
+
+- 1 commit(s) contributed to the release.
+- 0 day(s) passed between the first and last commit.
+- 1 commit(s) parsed as conventional.
+- 0 linked issue(s) detected in commits.
+- 10 day(s) passed between releases.
+
 ## 0.1.0-rc.2 - 2025-09-19
 
 ### Documentation
